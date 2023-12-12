@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Data</title>
+    <script>
+        async function getLatestMeasurements() {
+            try {
+                const response = await fetch('/api/patient/latest');
+                console.error
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                document.getElementById('height').innerText = 'Height: ' + data.height;
+                document.getElementById('weight').innerText = 'Weight: ' + data.weight;
+            } catch (error) {
+                console.error('Fetch error:', error);
+                alert('Error fetching data');
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Patient Measurement Data</h1>
+<button onclick="getLatestMeasurements()">Get Latest Measurements</button>
+<p id="height">Height: </p>
+<p id="weight">Weight: </p>
+</body>
+</html>
